@@ -1,0 +1,15 @@
+server:
+  port: 8099
+  context-path: /simple/api
+
+mysql:
+  host: localhost
+  port: 3306
+  username: root
+  password: root
+  database: gox_simple
+  params: charset=utf8&parseTime=True&loc=Asia%2FShanghai
+  max-lifetime: 7200
+  max-open-conns: 150
+  max-idle-conns: 50
+  table-prefix:
