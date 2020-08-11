@@ -21,7 +21,6 @@
 package server
 
 import (
-	"github.com/yhyzgn/gox/common"
 	"github.com/yhyzgn/gox/component/filter"
 	"github.com/yhyzgn/gox/component/interceptor"
 	"github.com/yhyzgn/gox/ctx"
@@ -45,11 +44,11 @@ func newWebConfig(contextPath string) *webConfig {
 
 func (wc *webConfig) Context(ctx *ctx.GoXContext) {
 	ctx.
+		SetContextPath(wc.contextPath).
 		SetNotFoundHandler(func(writer http.ResponseWriter, request *http.Request) {
 			http.Error(writer, "服务器度假去啦~", http.StatusNotFound)
 		}).
-		SetContextPath(wc.contextPath).
-		SetWare(common.ErrorResolverName, resolver.NewErrorResolver())
+		SetErrorResolver(resolver.NewErrorResolver())
 }
 
 func (wc *webConfig) ConfigFilter(chain *filter.Chain) {
